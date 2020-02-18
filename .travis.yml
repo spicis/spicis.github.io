@@ -1,12 +1,18 @@
+sudo: false
 language: node_js
 node_js:
-  - "12"
-before_deploy: npm run build
+  - 10 # use nodejs v10 LTS
+cache: npm
+branches:
+  only:
+    - master # build master branch only
+script:
+  - hexo generate # generate static files
 deploy:
   provider: pages
-  target-branch: master
-  github_token: $GITHUB_TOKEN
-  keep_history: true
-  skip_cleanup: true
+  skip-cleanup: true
+  github-token: $GH_TOKEN
+  keep-history: true
   on:
     branch: master
+  local-dir: public
