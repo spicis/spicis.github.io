@@ -2,17 +2,11 @@ language: node_js
 node_js:
   - "12"
 before_deploy: npm run build
-branches:
-  only:
-  - master
-  - /v\d+\.\d+[a-z]/
 deploy:
   provider: pages
-  local_dir: public
   target-branch: master
   github_token: $GITHUB_TOKEN
   keep_history: true
   skip_cleanup: true
   on:
     branch: master
-    tags: true
